@@ -924,8 +924,10 @@ public class NTProtocolHandler extends CoreProtocolHandler {
 				maxCount = dataLen;
 
 			// Read from the file
-
-			rdlen = disk.readFile(m_sess, conn, netFile, buf, dataPos, maxCount, offset);
+			// Synchronize reads using the network file
+			synchronized ( netFile) {
+				rdlen = disk.readFile(m_sess, conn, netFile, buf, dataPos, maxCount, offset);
+			}
 
 			// Return the data block
 
@@ -2705,8 +2707,10 @@ public class NTProtocolHandler extends CoreProtocolHandler {
 				maxCount = dataLen;
 
 			// Read from the file
-
-			rdlen = disk.readFile(m_sess, conn, netFile, buf, dataPos, maxCount, offset);
+			// Synchronize reads using the network file
+			synchronized ( netFile) {
+				rdlen = disk.readFile(m_sess, conn, netFile, buf, dataPos, maxCount, offset);
+			}
 		}
 		catch (InvalidDeviceInterfaceException ex) {
 
