@@ -7,7 +7,7 @@
         <version>6</version>
     </parent>
     <artifactId>alfresco-jlan-parent</artifactId>
-    <version>6.1-SNAPSHOT</version>
+    <version>6.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Alfresco JLAN Parent</name>
 
