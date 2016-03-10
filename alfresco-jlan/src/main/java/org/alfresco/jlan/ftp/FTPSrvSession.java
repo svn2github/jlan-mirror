@@ -2170,7 +2170,7 @@ public class FTPSrvSession extends SrvSession implements Runnable {
 			// Close the data socket to the client
 
 			if ( m_dataSess != null) {
-				m_dataSess.closeSession();
+				getFTPServer().releaseDataSession(m_dataSess);
 				m_dataSess = null;
 			}
 
