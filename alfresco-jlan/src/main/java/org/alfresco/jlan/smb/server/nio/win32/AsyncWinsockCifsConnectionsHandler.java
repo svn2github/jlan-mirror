@@ -484,7 +484,9 @@ public class AsyncWinsockCifsConnectionsHandler implements CifsConnectionsHandle
 							SMBSrvSession sess = SMBSrvSession.createSession( pktHandler, m_server, ++m_sessId);
 							
 							// DEBUG
-							
+							if ( Debug.EnableInfo && hasDebug())
+								Debug.println("[SMB] Created session " + sess.getUniqueId());
+
 							if ( Debug.EnableInfo && hasDebug())
 								Debug.println( "[SMB] Connection from " + clientSock.getName() + ", handler=" + channelHandler + ", sess=" + sess.getUniqueId());
 							

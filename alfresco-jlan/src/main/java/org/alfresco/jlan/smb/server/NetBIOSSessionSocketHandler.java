@@ -75,6 +75,8 @@ public class NetBIOSSessionSocketHandler extends SocketSessionHandler {
 			// Create a server session for the new request, and set the session id.
 
 			SMBSrvSession srvSess = SMBSrvSession.createSession(pktHandler, smbServer, getNextSessionId());
+			if ( Debug.EnableError && hasDebug())
+				Debug.println("[SMB] Created session " + srvSess.getUniqueId());
 
 			// Start the new session in a seperate thread
 

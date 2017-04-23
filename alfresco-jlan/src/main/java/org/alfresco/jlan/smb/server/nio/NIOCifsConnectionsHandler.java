@@ -446,7 +446,9 @@ public class NIOCifsConnectionsHandler implements CifsConnectionsHandler, Reques
 						SMBSrvSession sess = SMBSrvSession.createSession( pktHandler, m_server, ++m_sessId);
 						
 						// DEBUG
-						
+						if ( Debug.EnableInfo && hasDebug())
+							Debug.println("[SMB] Created session " + sess.getUniqueId());
+
 						if ( Debug.EnableInfo && hasDebug())
 							Debug.println( "[SMB] Connection from " + sockChannel.socket().getRemoteSocketAddress() + ", handler=" + channelHandler + ", sess=" + sess.getUniqueId());
 						

@@ -366,6 +366,8 @@ public class CIFSRequestHandler extends RequestHandler implements Runnable {
 				// Close the session
 				
 				sess.closeSession();
+				if ( Debug.EnableInfo && hasDebug())
+					Debug.println( "[SMB] Closed session, " + sess.getUniqueId() + ", addr=" + sess.getRemoteAddress().getHostAddress());
 			}
 			
 			// Close the selector
@@ -374,6 +376,10 @@ public class CIFSRequestHandler extends RequestHandler implements Runnable {
 				m_selector.close();
 			}
 			catch ( IOException ex) {
+				if ( Debug.EnableInfo && hasDebug()) {
+					Debug.println( "[SMB] Error closing Selector");
+					Debug.println( ex);
+				}
 			}
 		}
 

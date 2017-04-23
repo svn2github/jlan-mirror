@@ -393,6 +393,8 @@ public class SMBSrvSession extends SrvSession implements Runnable {
 
 		try {
 			m_pktHandler.closeHandler();
+			if ( Debug.EnableInfo && hasDebug(DBG_STATE))
+				debugPrintln("Closed packet handler for client: " + m_pktHandler.getClientName());
 		}
 		catch (Exception ex) {
 			Debug.println( ex);
@@ -423,6 +425,11 @@ public class SMBSrvSession extends SrvSession implements Runnable {
 			closeSocket();
 		}
 		catch (Exception ex) {
+			if ( Debug.EnableInfo && hasDebug(DBG_STATE)) {
+				debugPrintln("[SMB] Error during close session, " + getUniqueId()
+						+ ", addr=" + getRemoteAddress().getHostAddress());
+				debugPrintln(ex);
+			}
 		}
 
 	}
@@ -1353,6 +1360,10 @@ public class SMBSrvSession extends SrvSession implements Runnable {
 			// Cleanup the session, then close the session/socket
 			
 			closeSession();
+			if ( Debug.EnableInfo && hasDebug(DBG_STATE)) {
+				debugPrintln("[SMB] Closed session, " + getUniqueId()
+						+ ", addr=" + getRemoteAddress().getHostAddress());
+			}
 		}
 		catch (Exception ex) {
 
@@ -2241,7 +2252,7 @@ public class SMBSrvSession extends SrvSession implements Runnable {
 					// DEBUG
 					
 					if ( Debug.EnableInfo && hasDebug(DBG_NEGOTIATE))
-						debugPrintln("Disconnect existing session from " + addrStr + ", sess=" + curSess);
+						debugPrintln("Close existing session sess=" + curSess + "addr=" + addrStr);
 						
 					// Disconnect the existing session
 					
